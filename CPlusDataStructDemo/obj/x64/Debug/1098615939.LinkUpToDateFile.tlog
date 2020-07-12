@@ -1,0 +1,1 @@
+g++ -o "/root/projects/CPlusDataStructDemo/bin/x64/Debug/CPlusDataStructDemo.out" -Wl,--no-undefined -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack /root/projects/CPlusDataStructDemo/obj/x64/Debug/main.o
