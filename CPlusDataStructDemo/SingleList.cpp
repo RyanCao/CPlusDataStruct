@@ -4,9 +4,9 @@
 
 PSNODE create_list()
 {
-	PSNODE head = (PSNODE)malloc(sizeof(SNODE));
-	head->pNext = NULL;
-	if (head == NULL) {
+	PSNODE pHead = (PSNODE)malloc(sizeof(SNODE));
+	pHead->pNext = NULL;
+	if (pHead == NULL) {
 		printf("malloc mem failed!");
 		exit(-1);
 	}
@@ -14,11 +14,11 @@ PSNODE create_list()
 	SizeT len = 0;
 	printf("Input List Count:");
 	scanf("%d", &len);
-	PSNODE cNode = head;
+	PSNODE cNode = pHead;
 	SizeT val = 0;
 	for (SizeT i = 0; i < len; i++)
 	{
-		printf("Input %d Node Value:",i);
+		printf("Input %d Node Value:", i);
 		scanf("%d", &val);
 
 		PSNODE newNode = (PSNODE)malloc(sizeof(SNODE));
@@ -28,7 +28,8 @@ PSNODE create_list()
 		cNode->pNext = newNode;
 		cNode = newNode;
 	}
-	return head;
+
+	return pHead;
 }
 
 SizeT getLength(PSNODE pHead)
@@ -38,6 +39,7 @@ SizeT getLength(PSNODE pHead)
 	while (cNode!=NULL)
 	{
 		len++;
+		cNode = cNode->pNext;
 	}
 	return len;
 }

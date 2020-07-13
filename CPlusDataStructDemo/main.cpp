@@ -49,7 +49,6 @@ void testArr()
 void testList() 
 {
     PSNODE pHead = create_list();
-    
     show_list(pHead);
 }
 
@@ -59,7 +58,7 @@ int main()
     //testArr();
     testList();
     //等待输入，让Main程序暂停
-    getchar();
-
+    int val;
+    scanf("%d", &val);
     return 0;
 }
