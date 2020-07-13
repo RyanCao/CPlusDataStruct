@@ -6,7 +6,7 @@
 
 void init_Arr(PList list, int length)
 {
-    list->pBase = (int*)malloc(sizeof(int) * length);
+    list->pBase = (ElementType*)malloc(sizeof(ElementType) * length);
     if (list->pBase == NULL) {
         printf("malloc memory error!\n");
         exit(-1);
@@ -25,7 +25,7 @@ void show_Arr(PList list)
     }
     else {
         printf("Arr is :");
-        for (int i = 0, length = list->count; i < length; i++)
+        for (size_t i = 0, length = list->count; i < length; i++)
         {
             printf("%d,", list->pBase[i]);
         }
@@ -33,7 +33,7 @@ void show_Arr(PList list)
     }
 }
 
-bool append_Arr(PList list, int v)
+bool append_Arr(PList list, ElementType v)
 {
     if (isFull_Arr(list))
     {
@@ -61,7 +61,7 @@ bool isEmpty_Arr(PList list)
     return false;
 }
 
-bool insert_Arr(PList list, int value, int pos)
+bool insert_Arr(PList list, ElementType value, int pos)
 {
     if (isFull_Arr(list))
     {
@@ -75,7 +75,7 @@ bool insert_Arr(PList list, int value, int pos)
         return false;
     }
     printf("Insert Pos: (%d) Value (%d) !\n", pos, value);
-    for (int i = list->count, length = pos; i >= length; i--)
+    for (size_t i = list->count, length = pos; i >= length; i--)
     {
         list->pBase[i + 1] = list->pBase[i];
     }
@@ -85,7 +85,7 @@ bool insert_Arr(PList list, int value, int pos)
     return true;
 }
 
-bool delete_Arr(PList list, int pos, int* value)
+bool delete_Arr(PList list, int pos, ElementType* value)
 {
     if (isEmpty_Arr(list)) {
         printf("Array is Empty, Can't Delete %d!\n");
@@ -101,7 +101,7 @@ bool delete_Arr(PList list, int pos, int* value)
     printf("Delete Pos (%d) Value (%d) !\n", pos, *value);
 
     // 将pos位置之后的元素前移
-    for (int i = pos, length = list->count; i < length; i++)
+    for (size_t i = pos, length = list->count; i < length; i++)
     {
         list->pBase[i] = list->pBase[i + 1];
     }

@@ -20,7 +20,7 @@ int main()
 
     show_Arr(&arr);
 
-    int delteValue;
+    ElementType delteValue;
 
     delete_Arr(&arr, 5, &delteValue);
     show_Arr(&arr);
