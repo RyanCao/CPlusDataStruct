@@ -1,7 +1,7 @@
 ﻿#include "Arr.h"
 #include <stdio.h>
 
-int main()
+void testArr() 
 {
     struct Arr arr;
 
@@ -40,7 +40,21 @@ int main()
 
     delete_Arr(&arr, 2, &delteValue);
     show_Arr(&arr);
+}
 
+/// <summary>
+/// 测试链表
+/// </summary>
+void testList() 
+{
+
+}
+
+int main()
+{
+    
+    //testArr();
+    testList();
     //等待输入，让Main程序暂停
     getchar();
 
