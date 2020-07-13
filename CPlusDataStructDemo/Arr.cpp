@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 
-void init_Arr(PList list, int length)
+void init_Arr(PList list, SizeT length)
 {
     list->pBase = (ElementType*)malloc(sizeof(ElementType) * length);
     if (list->pBase == NULL) {
@@ -61,7 +61,7 @@ bool isEmpty_Arr(PList list)
     return false;
 }
 
-bool insert_Arr(PList list, ElementType value, int pos)
+bool insert_Arr(PList list, ElementType value, SizeT pos)
 {
     if (isFull_Arr(list))
     {
@@ -75,7 +75,7 @@ bool insert_Arr(PList list, ElementType value, int pos)
         return false;
     }
     printf("Insert Pos: (%d) Value (%d) !\n", pos, value);
-    for (size_t i = list->count, length = pos; i >= length; i--)
+    for (SizeT i = list->count, length = pos; i >= length; i--)
     {
         list->pBase[i + 1] = list->pBase[i];
     }
@@ -85,7 +85,7 @@ bool insert_Arr(PList list, ElementType value, int pos)
     return true;
 }
 
-bool delete_Arr(PList list, int pos, ElementType* value)
+bool delete_Arr(PList list, SizeT pos, ElementType* value)
 {
     if (isEmpty_Arr(list)) {
         printf("Array is Empty, Can't Delete %d!\n");
@@ -101,12 +101,17 @@ bool delete_Arr(PList list, int pos, ElementType* value)
     printf("Delete Pos (%d) Value (%d) !\n", pos, *value);
 
     // 将pos位置之后的元素前移
-    for (size_t i = pos, length = list->count; i < length; i++)
+    for (SizeT i = pos, length = list->count; i < length; i++)
     {
         list->pBase[i] = list->pBase[i + 1];
     }
     list->count--;
     return true;
+}
+
+SSizeT getIndex_Arr(PList pList, ElementType)
+{
+    return -1;
 }
 
 void sort_Arr(PList list)

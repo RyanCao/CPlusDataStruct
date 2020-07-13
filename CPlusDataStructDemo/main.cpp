@@ -1,4 +1,5 @@
 ﻿#include "Arr.h"
+#include "SingleList.h"
 #include <stdio.h>
 
 void testArr() 
@@ -47,7 +48,9 @@ void testArr()
 /// </summary>
 void testList() 
 {
-
+    PSNODE pHead = create_list();
+    
+    show_list(pHead);
 }
 
 int main()
