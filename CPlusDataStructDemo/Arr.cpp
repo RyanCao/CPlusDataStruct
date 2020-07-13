@@ -1,9 +1,7 @@
 #include "Arr.h"
 
 #include <stdio.h>
-#include <mm_malloc.h>
 #include <stdlib.h>
-
 
 
 void init_Arr(PList list, int length)
