@@ -1,8 +1,7 @@
 # CPlusDataStruct
 C++ 数据结构实现
 
-[数据接口与算法](https://github.com/wangzheng0822/algo)
-[CSharp算法](https://github.com/aalhour/C-Sharp-Algorithms)
+
 
 ## 数组
 - 实现一个支持动态扩容的数组
@@ -79,3 +78,7 @@ C++ 数据结构实现
 - 编程实现莱文斯坦最短编辑距离
 - 编程实现查找两个字符串的最长公共子序列
 - 编程实现一个数据序列的最长递增子序列
+
+## 参考
+- [数据接口与算法](https://github.com/wangzheng0822/algo)
+- [CSharp算法](https://github.com/aalhour/C-Sharp-Algorithms)
