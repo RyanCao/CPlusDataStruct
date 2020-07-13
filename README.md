@@ -1,7 +1,8 @@
 # CPlusDataStruct
 C++ 数据结构实现
 
-[参考来源](https://github.com/wangzheng0822/algo)
+[数据接口与算法](https://github.com/wangzheng0822/algo)
+[CSharp算法](https://github.com/aalhour/C-Sharp-Algorithms)
 
 ## 数组
 - 实现一个支持动态扩容的数组
