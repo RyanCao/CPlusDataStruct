@@ -74,14 +74,67 @@ bool append_list(PSNODE pHead, NodeElemType v)
 	return true;
 }
 
-bool insert_list(PSNODE pHead, NodeElemType, SizeT)
+bool insert_list(PSNODE pHead, NodeElemType v, SizeT pos)
 {
-	return false;
+	PSNODE p = pHead;
+	SizeT i = 0;
+	while (p!=NULL && i<pos)
+	{
+		p = p->pNext;
+		i++;
+	}
+	
+	printf("insert pos(%d) Value:%d ", pos, v);
+
+	if (i != pos || p==NULL) {
+		//
+		printf("Pos Error!\n");
+		return -1;
+	}
+	
+	PSNODE pnew = (PSNODE)malloc(sizeof(SNODE));
+	if (pnew == NULL) {
+		printf("malloc mem failed!\n");
+		exit(-1);
+	}
+
+	pnew->data = v;
+	pnew->pNext = p->pNext;
+
+	p->pNext = pnew ;
+
+	printf("succeed!\n");
+	return true;
 }
 
-bool delete_list(PSNODE pHead, SizeT, NodeElemType*)
+bool delete_list(PSNODE pHead, SizeT pos, NodeElemType* v)
 {
-	return false;
+	PSNODE p = pHead;
+	SizeT i = 0;
+	while (p != NULL && i < pos)
+	{
+		p = p->pNext;
+		i++;
+	}
+
+	if (i != pos || p == NULL) {
+		printf("pos error!\n");
+		return false;
+	}
+	
+	PSNODE pDelete = p->pNext;
+	if (pDelete != NULL) 
+	{
+		p->pNext = pDelete->pNext;
+		*v = pDelete->data;
+		delete pDelete;
+		return true;
+	}
+	else {
+		//此节点本身为空
+		printf("pos error!\n");
+		return false;
+	}
 }
 
 void show_list(PSNODE pHead)
