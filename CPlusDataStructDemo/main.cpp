@@ -43,12 +43,37 @@ void testArr()
     show_Arr(&arr);
 }
 
+void testSortArr() 
+{
+    struct Arr arr;
+
+    PList pArr = &arr;
+
+    init_Arr(pArr, 6);
+    append_Arr(pArr, 6);
+    append_Arr(pArr, 1);
+    append_Arr(pArr, 2);
+    append_Arr(pArr, 8);
+    
+    show_Arr(pArr);
+    sort_Arr(pArr);
+    show_Arr(pArr);
+
+}
 /// <summary>
 /// 测试链表
 /// </summary>
 void testList() 
 {
     PSNODE pHead = create_list();
+
+    //append_list(pHead, 100);
+    //append_list(pHead, 200);
+
+    show_list(pHead);
+    
+    sort_list(pHead);
+    
     show_list(pHead);
 }
 
@@ -56,6 +81,7 @@ int main()
 {
     
     //testArr();
+    //testSortArr();
     testList();
     //等待输入，让Main程序暂停
     int val;

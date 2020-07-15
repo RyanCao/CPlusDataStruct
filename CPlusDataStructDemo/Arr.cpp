@@ -116,4 +116,18 @@ SSizeT getIndex_Arr(PList pList, ElementType)
 
 void sort_Arr(PList list)
 {
+    printf("sort_Arr\n");
+
+    for (size_t i = 0,length = list->count; i < length-1; i++)
+    {
+        for (size_t j = i+1; j < length; j++)
+        {
+           if (list->pBase[j] < list->pBase[i]) {
+               // swap Î»ÖÃ
+               ElementType t = list->pBase[i];
+               list->pBase[i] = list->pBase[j];
+               list->pBase[j] = t;
+           }
+        }
+    }
 }
