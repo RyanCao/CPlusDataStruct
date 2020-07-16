@@ -84,10 +84,12 @@
     <ClCompile Include="Arr.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SingleList.cpp" />
+    <ClCompile Include="Stack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arr.h" />
     <ClInclude Include="SingleList.h" />
+    <ClInclude Include="Stack.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <ClCompile>

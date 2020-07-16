@@ -1,6 +1,7 @@
 ﻿#include "Arr.h"
 #include "SingleList.h"
 #include <stdio.h>
+#include "Stack.h"
 
 void testArr() 
 {
@@ -125,12 +126,50 @@ void testList()
     show_list(pHead);
 }
 
+/// <summary>
+/// 测试栈的函数
+/// </summary>
+void testStack() {
+    PSTACK pstack = create_stack();
+    show_stack(pstack);
+    push_stack(pstack, 1);
+    push_stack(pstack, 2);
+    push_stack(pstack, 3);
+    push_stack(pstack, 4);
+    push_stack(pstack, 5);
+    push_stack(pstack, 6);
+    show_stack(pstack);
+    
+    StackElemT v;
+    pop_stack(pstack, &v);
+    printf("pop %d", v);
+    pop_stack(pstack, &v);
+    printf("pop %d", v);
+    pop_stack(pstack, &v);
+    printf("pop %d", v);
+    pop_stack(pstack, &v);
+    printf("pop %d", v);
+    pop_stack(pstack, &v);
+    printf("pop %d", v);
+    pop_stack(pstack, &v);
+    printf("pop %d", v);
+    pop_stack(pstack, &v);
+    printf("pop %d", v);
+    pop_stack(pstack, &v);
+    printf("pop %d", v);
+    pop_stack(pstack, &v);
+    printf("pop %d", v);
+    show_stack(pstack);
+}
+
 int main()
 {
     
     //testArr();
     //testSortArr();
-    testList();
+    //testList();
+    
+    testStack();
     //等待输入，让Main程序暂停
     int val;
     scanf("%d", &val);
