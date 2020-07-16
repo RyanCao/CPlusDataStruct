@@ -142,23 +142,23 @@ void testStack() {
     
     StackElemT v;
     pop_stack(pstack, &v);
-    printf("pop %d", v);
+    printf("pop %d\n", v);
     pop_stack(pstack, &v);
-    printf("pop %d", v);
+    printf("pop %d\n", v);
     pop_stack(pstack, &v);
-    printf("pop %d", v);
+    printf("pop %d\n", v);
     pop_stack(pstack, &v);
-    printf("pop %d", v);
+    printf("pop %d\n", v);
     pop_stack(pstack, &v);
-    printf("pop %d", v);
+    printf("pop %d\n", v);
     pop_stack(pstack, &v);
-    printf("pop %d", v);
+    printf("pop %d\n", v);
     pop_stack(pstack, &v);
-    printf("pop %d", v);
+    printf("pop %d\n", v);
     pop_stack(pstack, &v);
-    printf("pop %d", v);
+    printf("pop %d\n", v);
     pop_stack(pstack, &v);
-    printf("pop %d", v);
+    printf("pop %d\n", v);
     show_stack(pstack);
 }
 

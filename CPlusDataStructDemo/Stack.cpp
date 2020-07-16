@@ -44,7 +44,7 @@ bool isEmpty_stack(PSTACK pStack)
 
 void push_stack(PSTACK pStack, StackElemT v)
 {
-	printf("push_stack Value:%d ", v);
+	printf("push_stack Value:%d \n", v);
 
 	PNODE pNew = (PNODE)malloc(sizeof(NODE));
 	if (pNew == NULL) {
@@ -69,14 +69,15 @@ bool pop_stack(PSTACK pStack, StackElemT* v)
 	printf("pop stack\n");
 
 	PNODE p = pStack->pBottom;
-	while (p->pNext != NULL)
+	while (p->pNext != pStack->pTop)
 	{
 		p = p->pNext;
 	}
 
-	p->pNext = NULL;
 	*v = pStack->pTop->data;
-	delete pStack->pTop;
+	free(p->pNext);
+
+	p->pNext = NULL;
 	pStack->pTop = p;
 }
 
