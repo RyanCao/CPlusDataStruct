@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{80eec0e5-70dc-4b66-b5b3-8c601ce9f29a}</ProjectGuid>
-    <RootNamespace>Demo</RootNamespace>
+    <RootNamespace>CPlusDataStructDemo</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
