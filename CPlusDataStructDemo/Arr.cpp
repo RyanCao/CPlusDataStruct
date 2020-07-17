@@ -88,7 +88,7 @@ bool insert_Arr(PList list, ElementType value, SizeT pos)
 bool delete_Arr(PList list, SizeT pos, ElementType* value)
 {
     if (isEmpty_Arr(list)) {
-        printf("Array is Empty, Can't Delete %d!\n");
+        printf("Array is Empty, Can't Delete!\n");
         return false;
     }
     if (pos < 0 || pos >= list->count) {

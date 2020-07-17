@@ -172,6 +172,6 @@ int main()
     testStack();
     //等待输入，让Main程序暂停
     int val;
-    scanf("%d", &val);
+    scanf_s("%d", &val);
     return 0;
 }

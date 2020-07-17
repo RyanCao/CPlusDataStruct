@@ -79,6 +79,7 @@ bool pop_stack(PSTACK pStack, StackElemT* v)
 
 	p->pNext = NULL;
 	pStack->pTop = p;
+	return true;
 }
 
 void show_stack(PSTACK pStack)

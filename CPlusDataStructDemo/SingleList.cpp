@@ -13,13 +13,13 @@ PSNODE create_list()
 	
 	SizeT len;
 	printf("Input List Count:");
-	scanf("%d", &len);
+	scanf_s("%d", &len);
 	PSNODE cNode = pHead;
 	SizeT val = 0;
 	for (SizeT i = 0; i < len; i++)
 	{
 		printf("Input %d Node Value:", i);
-		scanf("%d", &val);
+		scanf_s("%d", &val);
 
 		PSNODE newNode = (PSNODE)malloc(sizeof(SNODE));
 		newNode->data = val;
@@ -89,7 +89,7 @@ bool insert_list(PSNODE pHead, NodeElemType v, SizeT pos)
 	if (i != pos || p==NULL) {
 		//
 		printf("Pos Error!\n");
-		return -1;
+		return false;
 	}
 	
 	PSNODE pnew = (PSNODE)malloc(sizeof(SNODE));
@@ -148,14 +148,15 @@ void show_list(PSNODE pHead)
 
 	PSNODE cNode = pHead->pNext;
 	printf("list is ");
-	for (SizeT i = 0,length = getLength(pHead); i < length; i++)
+	while (cNode!=NULL)
 	{
-		printf("%d",cNode->data);
+		printf("%d", cNode->data);
 		cNode = cNode->pNext;
 		if (cNode != NULL) {
 			printf(",");
 		}
 	}
+
 	printf("\n");
 
 }
