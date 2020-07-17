@@ -13,13 +13,13 @@ PSNODE create_list()
 	
 	SizeT len;
 	printf("Input List Count:");
-	scanf_s("%d", &len);
+	scanf("%d", &len);
 	PSNODE cNode = pHead;
 	SizeT val = 0;
 	for (SizeT i = 0; i < len; i++)
 	{
 		printf("Input %d Node Value:", i);
-		scanf_s("%d", &val);
+		scanf("%d", &val);
 
 		PSNODE newNode = (PSNODE)malloc(sizeof(SNODE));
 		newNode->data = val;
