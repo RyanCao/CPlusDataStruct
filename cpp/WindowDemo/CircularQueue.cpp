@@ -57,7 +57,7 @@ void enQueue(PCQUEUE pQueue, QueueElemT v)
 
 bool deQueue(PCQUEUE pQueue, QueueElemT* v)
 {
-	printf("DeQueue Value \n", v);
+	printf("DeQueue Value \n");
 
 	if (isEmpty_queue(pQueue))
 	{
@@ -79,80 +79,4 @@ void show_queue(PCQUEUE pQueue)
 		printf("%d ", pQueue->pBase[cI]);
 	}
 	printf(":<-rear\n");
-}
-
-
-int main()
-{
-	PCQUEUE pqueue = create_queue(6);
-	QueueElemT v;
-
-	enQueue(pqueue, 1);
-	show_queue(pqueue);
-
-	enQueue(pqueue, 2);
-	show_queue(pqueue);
-
-	enQueue(pqueue, 3);
-	show_queue(pqueue);
-
-	enQueue(pqueue, 4);
-	show_queue(pqueue);
-
-	enQueue(pqueue, 5);
-	show_queue(pqueue);
-
-	enQueue(pqueue, 6);
-	show_queue(pqueue);
-
-	
-
-	deQueue(pqueue, &v);
-	printf("deQueue %d\n", v);
-	show_queue(pqueue);
-
-	enQueue(pqueue, 6);
-	show_queue(pqueue);
-
-	deQueue(pqueue, &v);
-	printf("deQueue %d\n", v);
-	show_queue(pqueue);
-
-	enQueue(pqueue, 6);
-	show_queue(pqueue);
-
-	deQueue(pqueue, &v);
-	printf("deQueue %d\n", v);
-	show_queue(pqueue);
-
-	deQueue(pqueue, &v);
-	printf("deQueue %d\n", v);
-	show_queue(pqueue);
-
-	deQueue(pqueue, &v);
-	printf("deQueue %d\n", v);
-	show_queue(pqueue);
-
-	deQueue(pqueue, &v);
-	printf("deQueue %d\n", v);
-	show_queue(pqueue);
-
-	deQueue(pqueue, &v);
-	printf("deQueue %d\n", v);
-	show_queue(pqueue);
-
-	deQueue(pqueue, &v);
-	printf("deQueue %d\n", v);
-	show_queue(pqueue);
-
-	deQueue(pqueue, &v);
-	printf("deQueue %d\n", v);
-	show_queue(pqueue);
-
-	//µÈ´ýÊäÈë£¬ÈÃMain³ÌÐòÔÝÍ£
-	//int val;
-	//scanf("%d", &val);
-	getchar();
-
-	return 0;
 }
