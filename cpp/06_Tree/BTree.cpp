@@ -1,6 +1,7 @@
 #include "BTree.h"
 #include <malloc.h>
 #include <stdio.h>
+#include <string.h>
 
 BTNODE* createBTree(void)
 {
@@ -16,17 +17,17 @@ BTNODE* createBTree(void)
 	BTNODE* pN = (BTNODE*)malloc(sizeof(BTNODE));
 	BTNODE* pS = (BTNODE*)malloc(sizeof(BTNODE));
 
-	pA->data = 'A';
-	pB->data = 'B';
-	pC->data = 'C';
-	pD->data = 'D';
-	pE->data = 'E';
-	pF->data = 'F';
-	pL->data = 'L';
-	pQ->data = 'Q';
-	pM->data = 'M';
-	pN->data = 'N';
-	pS->data = 'S';
+	pA->data = "A";
+	pB->data = "B";
+	pC->data = "C";
+	pD->data = "D";
+	pE->data = "E";
+	pF->data = "F";
+	pL->data = "L";
+	pQ->data = "Q";
+	pM->data = "M";
+	pN->data = "N";
+	pS->data = "S";
 
 	pA->pLChild = pB;
 	pA->pRChild = pQ;
@@ -65,12 +66,42 @@ BTNODE* createBTree(void)
 	return pA;
 }
 
+void createBTree(BTree** bTree)
+{
+	char* p  = (char*)malloc(sizeof(char)*2);
+	if (p == NULL)
+	{
+		return;
+	}
+
+	BTreeDataItem data = p;
+
+	printf("\r\nInput Node Data(Input Z End Edit): ");
+	scanf("%s", data, 2);
+	if (strcmp(data, "Z") == 0) {
+		*bTree = NULL;
+	}
+	else {
+		*bTree = (BTree*)malloc(sizeof(BTreeNode));
+		if (*bTree == NULL)
+		{
+			return;
+		}
+		(*bTree)->data = data;
+		printf("\r\n create %s lChild:", data);
+		createBTree(&(*bTree)->pLChild);
+		printf("\r\n create %s rChild:", data);
+		createBTree(&(*bTree)->pRChild);
+	}
+	return;
+}
+
 void PreOrderTraversal(BTNODE* pNode)
 {
 	if (pNode == NULL)
 		return;
 
-	printf("%c ", pNode->data);
+	printf("%s ", pNode->data);
 	if (pNode->pLChild != NULL) {
 		PreOrderTraversal(pNode->pLChild);
 	}
@@ -88,7 +119,7 @@ void MiddleOrderTraversal(BTNODE* pNode)
 	if (pNode->pLChild != NULL) {
 		PreOrderTraversal(pNode->pLChild);
 	}
-	printf("%c ", pNode->data);
+	printf("%s ", pNode->data);
 	if (pNode->pRChild != NULL) {
 		PreOrderTraversal(pNode->pRChild);
 	}
@@ -105,14 +136,15 @@ void PostOrderTraversal(BTNODE* pNode)
 	if (pNode->pRChild != NULL) {
 		PreOrderTraversal(pNode->pRChild);
 	}
-	printf("%c ", pNode->data);
+	printf("%s ", pNode->data);
 }
 
 int main()
 {
 
 	//µ»¥˝ ‰»Î£¨»√Main≥Ã–Ú‘›Õ£
-	BTNODE* pRoot = createBTree();
+	BTree* pRoot = NULL;
+	createBTree(&pRoot);
 
 	printf("PreOrderTraversal: ");
 	PreOrderTraversal(pRoot);

@@ -3,7 +3,7 @@
 /// <summary>
 /// BTree 每个元素的数据
 /// </summary>
-typedef char BTreeDataItem;
+typedef char* BTreeDataItem;
 
 typedef unsigned int SizeT;
 typedef int SSizeT;
@@ -15,13 +15,19 @@ typedef struct BTreeNode {
 	BTreeDataItem data;			//数据值
 	struct BTreeNode* pLChild;	//左孩子
 	struct BTreeNode* pRChild;	//右孩子
-}BTNODE,*PBTNODE;
+}BTNODE,BTree,*PBTNODE;
 
 /// <summary>
 /// 创建一颗二叉树，返回根节点
 /// </summary>
 /// <returns></returns>
 BTNODE* createBTree(void);
+
+/// <summary>
+/// 创建二叉树
+/// </summary>
+/// <param name=""></param>
+void createBTree(BTree** bTree);
 
 /// <summary>
 /// 先序遍历二叉树

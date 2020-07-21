@@ -34,6 +34,12 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BTree.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BTree.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{b9326ad3-ea2d-4d49-af80-c59bde0d6ecb}</ProjectGuid>
     <Keyword>Linux</Keyword>
@@ -74,12 +80,6 @@
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
-  <ItemGroup>
-    <ClCompile Include="BTree.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="BTree.h" />
-  </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
