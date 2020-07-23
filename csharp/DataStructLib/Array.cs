@@ -3,6 +3,10 @@ using System.Text;
 
 namespace Chester.DataStructLib
 {
+    /// <summary>
+    /// 数组实现基类
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IArray<T>
     {
         /// <summary>
@@ -41,12 +45,13 @@ namespace Chester.DataStructLib
         /// <summary>
         /// 尝试获取数组元素
         /// </summary>
-        /// <param name="index"></param>
+        /// <param name="index">索引位置从0开始</param>
         /// <param name="t"></param>
         /// <returns></returns>
         bool TryGetItem(int index, out T t);
         /// <summary>
-        /// 获取索引位置
+        /// 获取索引位置 
+        /// 第一个元素的索引值为0
         /// </summary>
         /// <param name="t"></param>
         /// <returns></returns>

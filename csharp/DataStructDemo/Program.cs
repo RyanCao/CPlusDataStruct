@@ -23,6 +23,8 @@ namespace DataStruct
             array.Append(6);
             Console.WriteLine(array);
 
+            Console.WriteLine(array.IndexOf(4));
+
         }
     }
 }
