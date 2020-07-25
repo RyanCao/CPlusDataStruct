@@ -8,7 +8,7 @@ namespace DataStruct
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            IArray<int> array = new Array<int>(5);
+            IArray<int> array = new VariableArray<int>(2);
             
             array.Append(1);
             Console.WriteLine(array);
