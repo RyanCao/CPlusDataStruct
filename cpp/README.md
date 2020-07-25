@@ -80,5 +80,5 @@ C++ 数据结构实现
 - 编程实现一个数据序列的最长递增子序列
 
 ## 参考
-- [数据接口与算法](https://github.com/wangzheng0822/algo)
-- [CSharp算法](https://github.com/aalhour/C-Sharp-Algorithms)
+- [数据接口与算法](https://gitee.com/rcant/algo)
+- [CSharp算法](https://gitee.com/rcant/C-Sharp-Algorithms)
