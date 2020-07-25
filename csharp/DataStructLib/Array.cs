@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Chester.DataStructLib
@@ -57,6 +58,12 @@ namespace Chester.DataStructLib
         /// <returns></returns>
         int IndexOf(T t);
         /// <summary>
+        /// 访问器
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        T this[int index] { get; set; }
+        /// <summary>
         /// 是否为满
         /// </summary>
         /// <returns></returns>
@@ -86,6 +93,22 @@ namespace Chester.DataStructLib
                 return mLength;
             }
         }
+
+        public T this[int index]
+        {
+            get {
+                if (index < 0 || index >= mLength)
+                    throw new Exception("index out !");
+                return mData[index];
+            }
+            set
+            {
+                if (index < 0 || index >= mLength)
+                    throw new Exception("index out !");
+                mData[index] = value;
+            }
+        }
+
         public bool IsFull()
         {
             if (mLength >= mData.Length)
@@ -144,7 +167,7 @@ namespace Chester.DataStructLib
             return -1;
         }
 
-        public bool Insert(int index, T t)
+        public virtual bool Insert(int index, T t)
         {
             if (IsFull())
             {
@@ -175,7 +198,7 @@ namespace Chester.DataStructLib
             return false;
         }
 
-        public bool Append(T t)
+        public virtual bool Append(T t)
         {
             if (IsFull())
             {
@@ -221,13 +244,18 @@ namespace Chester.DataStructLib
     /// <typeparam name="T"></typeparam>
     public class VariableArray<T> : Array<T>
     {
+        /// <summary>
+        /// 自动增加因子
+        /// </summary>
+        private const int INCREMENT = 64;
+
         public VariableArray(int _capacity) : base(_capacity)
         {
         }
 
         protected override bool MallocMoreSize()
         {
-            return SetSize(mData.Length * 2);
+            return SetSize(mData.Length + INCREMENT);
         }
 
         /// <summary>
@@ -252,6 +280,82 @@ namespace Chester.DataStructLib
             mData = array;
 
             return true;
+        }
+    }
+
+    /// <summary>
+    /// 自动排序的数组
+    /// 自动排序的数组 是不能实现插入函数的
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class SortArray<T> : VariableArray<T>
+    {
+        /// <summary>
+        /// 比较方法
+        /// </summary>
+        public Comparison<T> Comparer { get; set; }
+
+        public SortArray(int _capacity) : base(_capacity)
+        {
+        }
+        /// <summary>
+        /// 插入数据 和 append 操作相同
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public override bool Insert(int index, T t)
+        {
+            return base.Append(t);
+        }
+
+        /// <summary>
+        /// 追加数据的时候 判断数据
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public override bool Append(T t)
+        {
+            if (IsFull())
+            {
+                bool isSuccuss = MallocMoreSize();
+                if (!isSuccuss)
+                    return false;
+            }
+            int mPos = GetInsertPos(t);
+            return base.Insert(mPos, t);
+        }
+
+        /// <summary>
+        /// 获取待插入的位置
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        private int GetInsertPos(T t)
+        {
+            if (Comparer == null)
+                return mLength;
+
+            for (int i = 0; i < mLength; i++)
+            {
+                if (Comparer(mData[i], t) > 0)
+                {
+                    return i;
+                }
+            }
+            return mLength;
+        }
+
+        /// <summary>
+        /// 合并数组
+        /// </summary>
+        /// <param name="t"></param>
+        public void Merge(SortArray<T> array)
+        {
+            for (int i = 0, length = array.Length; i < length; i++)
+            {
+                Append(array[i]);
+            }
         }
     }
 }
