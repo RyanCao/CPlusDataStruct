@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Chester.DataStructLib;
+using DataStructLib;
 
 namespace DataStruct
 {
@@ -8,9 +9,26 @@ namespace DataStruct
     {
         static void Main(string[] args)
         {
-            TestArray();
+            //TestArray();
+            TesthashTable();
         }
 
+        static void TesthashTable()
+        {
+            HashTable<string, int> hashTable = new HashTable<string, int>();
+            hashTable["a"] = 1;
+            hashTable["b"] = 2;
+            hashTable["c"] = 3;
+            hashTable["d"] = 4;
+            hashTable["e"] = 5;
+            hashTable["f"] = 6;
+            hashTable["g"] = 7;
+            hashTable["g"] = 8;
+            hashTable["g"] = 9;
+            hashTable["g"] = 10;
+
+            Console.WriteLine(hashTable);
+        }
         static void TestArray()
         {
             Comparison<int> comparison = delegate (int a, int b)

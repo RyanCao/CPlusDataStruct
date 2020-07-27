@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace DataStructLib
@@ -45,16 +44,34 @@ namespace DataStructLib
 
     public class Entry<K, V>
     {
+        /// <summary>
+        /// 当前节点的K值
+        /// </summary>
         public K key;
+        /// <summary>
+        /// 当前节点的V值
+        /// </summary>
         public V value;
-
-        public Entry(K k, V v)
+        /// <summary>
+        /// 链表指向的下一个对象
+        /// </summary>
+        public Entry<K, V> next;
+        public Entry(K k, V v, Entry<K, V> next = null)
         {
             this.key = k;
             this.value = v;
+            this.next = next;
         }
-
-        public Entry<K, V> next;
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("(");
+            stringBuilder.Append(key);
+            stringBuilder.Append(",");
+            stringBuilder.Append(value);
+            stringBuilder.Append(")");
+            return stringBuilder.ToString();
+        }
     }
 
     /// <summary>
@@ -66,14 +83,6 @@ namespace DataStructLib
         /// 默认实例化的值
         /// </summary>
         private const int DEFAULT_INITAL_CAPACITY = 8;
-        /// <summary>
-        /// 散列表大小 实际占内存大小
-        /// </summary>
-        private int size;
-        /// <summary>
-        /// 散列表的长度 , 实际由多少条数据
-        /// </summary>
-        private int length;
 
         /// <summary>
         /// 数据存放位置
@@ -83,8 +92,6 @@ namespace DataStructLib
         public HashTable()
         {
             mData = new Entry<K, V>[DEFAULT_INITAL_CAPACITY];
-            size = DEFAULT_INITAL_CAPACITY;
-            length = 0;
         }
 
         /// <summary>
@@ -101,16 +108,8 @@ namespace DataStructLib
             else
             {
                 int h = key.GetHashCode();
-                return h ^ (h >> 16) % mData.Length;
+                return (h ^ (h >> 16)) % mData.Length;
             }
-        }
-
-        /// <summary>
-        /// 自动扩容
-        /// </summary>
-        private void resize()
-        {
-
         }
 
 
@@ -118,35 +117,122 @@ namespace DataStructLib
         {
             get
             {
-                throw new NotImplementedException();
+                return Get(index);
             }
             set
             {
-                throw new NotImplementedException();
+                Add(index, value);
             }
         }
 
+        /// <summary>
+        /// 添加元素 如果键值重复了，如何解决
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
         public void Add(K key, V value)
         {
             int index = hash(key);
-            mData[index] = new Entry<K, V>(default(K), default(V));
-            
-            throw new NotImplementedException();
+            if (mData[index] == null)
+            {
+                mData[index] = new Entry<K, V>(key, value);
+            }
+            else
+            {
+                Entry<K, V> entry = mData[index];
+                while (entry.next != null && !entry.key.Equals(key))
+                {
+                    entry = entry.next;
+                }
+
+                if (entry.key.Equals(key))
+                {
+                    entry.value = value;
+                }
+                else
+                {
+                    entry.next = new Entry<K, V>(key, value);
+                }
+            }
         }
 
         public V Get(K key)
         {
-            throw new NotImplementedException();
+            V value;
+            bool isGet = TryGetValue(key, out value);
+            if (isGet)
+            {
+                return value;
+            }
+            else
+            {
+                throw new Exception("key not found!");
+            }
         }
 
         public void Remove(K key)
         {
-            throw new NotImplementedException();
+            int index = hash(key);
+            Entry<K, V> entry = mData[index];
+            if (entry.key.Equals(key))
+            {
+                mData[index] = entry.next;
+            }
+            else
+            {
+                while (entry.next != null && !entry.next.key.Equals(key))
+                {
+                    entry = entry.next;
+                }
+
+                if (entry.next != null)
+                {
+                    Entry<K, V> entryRemove = entry.next;
+                    entry.next = entryRemove.next;
+                    //清空 entryRemove 内存?
+                }
+            }
         }
 
         public bool TryGetValue(K key, out V value)
         {
-            throw new NotImplementedException();
+            int index = hash(key);
+            Entry<K, V> entry = mData[index];
+
+            while (entry != null && !entry.key.Equals(key))
+            {
+                entry = entry.next;
+            }
+
+            if (entry != null)
+            {
+                value = entry.value;
+                return true;
+            }
+            else
+            {
+                value = default(V);
+                return false;
+            }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("[");
+
+            for (int i = 0, mLength = mData.Length; i < mLength; i++)
+            {
+                Entry<K, V> entry = mData[i];
+                while (entry != null)
+                {
+                    stringBuilder.Append(entry);
+                    entry = entry.next;
+                }
+                stringBuilder.Append(",");
+            }
+            stringBuilder.Append("]");
+            return stringBuilder.ToString();
         }
     }
 }
