@@ -4,7 +4,7 @@ using System.Text;
 namespace Chester.DataStructLib
 {
     /// <summary>
-    /// 数组实现基类
+    /// 数组接口
     /// </summary>
     /// <typeparam name="T">泛型类表示数据类型</typeparam>
     public interface IArray<T>

@@ -10,7 +10,8 @@ namespace DataStruct
         static void Main(string[] args)
         {
             //TestArray();
-            TesthashTable();
+            //TesthashTable();
+            TestLinkedList();
         }
 
         static void TesthashTable()
@@ -79,5 +80,47 @@ namespace DataStruct
             Console.WriteLine(sortArray2);
 
         }
+
+        static void TestLinkedList()
+        {
+            Comparison<int> comparison = delegate (int a, int b)
+            {
+                if (a > b)
+                    return 1;
+                else if (a == b)
+                    return 0;
+                else
+                    return -1;
+            };
+
+            SingleLinkedList<int> linkedList = new SingleLinkedList<int>();
+
+            //IArray<int> array = new VariableArray<int>(2);
+            ILinkedList<int> array = linkedList;
+
+            array.Append(10);
+            Console.WriteLine(array);
+            array.Append(22);
+            Console.WriteLine(array);
+            array.Append(32);
+            Console.WriteLine(array);
+            array.Append(4);
+            Console.WriteLine(array);
+            array.Append(51);
+            Console.WriteLine(array);
+            array.Append(6);
+            Console.WriteLine(array);
+
+            Console.WriteLine(array.IndexOf(4));
+            Console.WriteLine(array[0]);
+            Console.WriteLine(array[1]);
+            Console.WriteLine(array[2]);
+            Console.WriteLine(array[3]);
+            Console.WriteLine(array[4]);
+            Console.WriteLine(array[5]);
+            Console.WriteLine(array[6]);
+
+        }
+
     }
 }
