@@ -1,0 +1,7 @@
+﻿namespace DataStructLib
+{
+    class LRUHashTable
+    {
+
+    }
+}

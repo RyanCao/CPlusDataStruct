@@ -77,6 +77,7 @@ namespace DataStruct
             sortArray2.Merge(array as SortArray<int>);
 
             Console.WriteLine(sortArray2);
+
         }
     }
 }

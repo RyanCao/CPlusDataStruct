@@ -62,6 +62,7 @@ namespace DataStructLib
             this.value = v;
             this.next = next;
         }
+
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -83,15 +84,29 @@ namespace DataStructLib
         /// 默认实例化的值
         /// </summary>
         private const int DEFAULT_INITAL_CAPACITY = 8;
+        /// <summary>
+        /// 装载因子 
+        /// </summary>
+        private const float LOAD_FACTOR = 0.75f;
+
+        /// <summary>
+        /// 实际元素数量 
+        /// </summary>
+        private int size = 0;
+
+        /// <summary>
+        /// 散列表索引数量
+        /// </summary>
+        private int use = 0;
 
         /// <summary>
         /// 数据存放位置
         /// </summary>
-        private Entry<K, V>[] mData;
+        private Entry<K, V>[] mTable;
 
         public HashTable()
         {
-            mData = new Entry<K, V>[DEFAULT_INITAL_CAPACITY];
+            mTable = new Entry<K, V>[DEFAULT_INITAL_CAPACITY];
         }
 
         /// <summary>
@@ -108,7 +123,7 @@ namespace DataStructLib
             else
             {
                 int h = key.GetHashCode();
-                return (h ^ (h >> 16)) % mData.Length;
+                return (h ^ (h >> 16)) % mTable.Length;
             }
         }
 
@@ -133,18 +148,34 @@ namespace DataStructLib
         public void Add(K key, V value)
         {
             int index = hash(key);
-            if (mData[index] == null)
+
+            // 位置未被引用，创建哨兵节点
+            if (mTable[index] == null)
             {
-                mData[index] = new Entry<K, V>(key, value);
+                mTable[index] = new Entry<K, V>(default(K), default(V));
+            }
+
+            Entry<K, V> entry = mTable[index];
+            if (entry.next == null)
+            {
+                //新增节点
+                entry.next = new Entry<K, V>(key, value);
+                size++;
+                use++;
+
+                //动态扩容
+                if (use > mTable.Length * LOAD_FACTOR)
+                {
+                    //大小重新设置
+                    resize();
+                }
             }
             else
             {
-                Entry<K, V> entry = mData[index];
                 while (entry.next != null && !entry.key.Equals(key))
                 {
                     entry = entry.next;
                 }
-
                 if (entry.key.Equals(key))
                 {
                     entry.value = value;
@@ -152,6 +183,37 @@ namespace DataStructLib
                 else
                 {
                     entry.next = new Entry<K, V>(key, value);
+                    size++;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 扩容
+        /// </summary>
+        private void resize()
+        {
+            Entry<K, V>[] oldTable = mTable;
+            mTable = (Entry<K, V>[])new Entry<K,V>[mTable.Length * 2];
+            use = 0;
+            for (int i = 0; i < oldTable.Length; i++)
+            {
+                if (oldTable[i] == null || oldTable[i].next == null)
+                {
+                    continue;
+                }
+                Entry<K, V> e = oldTable[i];
+                while (e.next != null)
+                {
+                    e = e.next;
+                    int index = hash(e.key);
+                    if (mTable[index] == null)
+                    {
+                        use++;
+                        // 创建哨兵节点
+                        mTable[index] = new Entry<K,V>(default(K), default(V), null);
+                    }
+                    mTable[index].next = new Entry<K,V>(e.key, e.value, mTable[index].next);
                 }
             }
         }
@@ -173,31 +235,41 @@ namespace DataStructLib
         public void Remove(K key)
         {
             int index = hash(key);
-            Entry<K, V> entry = mData[index];
-            if (entry.key.Equals(key))
-            {
-                mData[index] = entry.next;
-            }
-            else
-            {
-                while (entry.next != null && !entry.next.key.Equals(key))
-                {
-                    entry = entry.next;
-                }
+            Entry<K, V> entry = mTable[index];
 
-                if (entry.next != null)
-                {
-                    Entry<K, V> entryRemove = entry.next;
-                    entry.next = entryRemove.next;
-                    //清空 entryRemove 内存?
-                }
+            if (entry == null || entry.next == null)
+            {
+                return;
             }
+
+            Entry<K, V> pre;
+            Entry<K, V> headNode = entry;
+
+            do
+            {
+                pre = entry;
+                entry = entry.next;
+                if (key.Equals(entry.key))
+                {
+                    pre.next = entry.next;
+                    size--;
+                    if (headNode.next == null) use--;
+                    return;
+                }
+            } while (entry.next != null);
+
         }
 
         public bool TryGetValue(K key, out V value)
         {
             int index = hash(key);
-            Entry<K, V> entry = mData[index];
+            Entry<K, V> entry = mTable[index];
+
+            if (entry == null || entry.next == null)
+            {
+                value = default(V);
+                return false;
+            }
 
             while (entry != null && !entry.key.Equals(key))
             {
@@ -221,9 +293,9 @@ namespace DataStructLib
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("[");
 
-            for (int i = 0, mLength = mData.Length; i < mLength; i++)
+            for (int i = 0, mLength = mTable.Length; i < mLength; i++)
             {
-                Entry<K, V> entry = mData[i];
+                Entry<K, V> entry = mTable[i];
                 while (entry != null)
                 {
                     stringBuilder.Append(entry);
