@@ -4,72 +4,6 @@ using System.Text;
 namespace Chester.DataStructLib
 {
     /// <summary>
-    /// 链表接口
-    /// </summary>
-    /// <typeparam name="T">泛型数据</typeparam>
-    public interface ILinkedList<T>
-    {
-        /// <summary>
-        /// 插入
-        /// </summary>
-        /// <param name="index"></param>
-        /// <param name="newElem"></param>
-        /// <returns></returns>
-        bool Insert(int index, T newElem);
-        /// <summary>
-        /// 追加
-        /// </summary>
-        /// <param name="t"></param>
-        /// <returns></returns>
-        bool Append(T t);
-        /// <summary>
-        /// 删除元素
-        /// </summary>
-        /// <param name="index"></param>
-        /// <param name="t"></param>
-        /// <returns></returns>
-        bool Delete(int index, out T t);
-        /// <summary>
-        /// 删除元素
-        /// </summary>
-        /// <param name="t"></param>
-        /// <returns></returns>
-        bool Delete(T t);
-        /// <summary>
-        /// 清空单链表
-        /// </summary>
-        void Clear();
-        /// <summary>
-        /// 求链表长度
-        /// </summary>
-        int Length { get; }
-        /// <summary>
-        /// 获取元素
-        /// </summary>
-        /// <param name="index"></param>
-        /// <param name="t"></param>
-        /// <returns></returns>
-        bool TryGetItem(int index, out T t);
-        /// <summary>
-        /// 求元素索引
-        /// </summary>
-        /// <param name="t"></param>
-        /// <returns></returns>
-        int IndexOf(T t);
-        /// <summary>
-        /// 访问器
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        T this[int index] { get; set; }
-        /// <summary>
-        /// 链表判空
-        /// </summary>
-        /// <returns></returns>
-        bool IsEmpty();
-
-    }
-    /// <summary>
     /// 单链表Node节点
     /// </summary>
     /// <typeparam name="T">泛型数据</typeparam>
@@ -97,7 +31,7 @@ namespace Chester.DataStructLib
     /// 单链表实现
     /// </summary>
     /// <typeparam name="T">泛型数据</typeparam>
-    public class SingleLinkedList<T> : ILinkedList<T>
+    public class SingleLinkedList<T> : IArray<T>
     {
         /// <summary>
         /// 头节点
@@ -258,7 +192,14 @@ namespace Chester.DataStructLib
             Console.WriteLine("Succeed!");
             return true;
         }
-
+        /// <summary>
+        /// 永远不会满
+        /// </summary>
+        /// <returns>永远false</returns>
+        public bool IsFull()
+        {
+            return false;
+        }
         public bool IsEmpty()
         {
             return HeadNode.Next == null;
@@ -312,5 +253,6 @@ namespace Chester.DataStructLib
             stringBuilder.Append("]");
             return stringBuilder.ToString();
         }
+
     }
 }

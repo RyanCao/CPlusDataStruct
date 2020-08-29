@@ -94,9 +94,7 @@ namespace DataStruct
             };
 
             SingleLinkedList<int> linkedList = new SingleLinkedList<int>();
-
-            //IArray<int> array = new VariableArray<int>(2);
-            ILinkedList<int> array = linkedList;
+            IArray<int> array = linkedList;
 
             array.Append(10);
             Console.WriteLine(array);
